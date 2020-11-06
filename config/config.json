@@ -4,8 +4,7 @@
     "password": "40bb3c44",
     "database": "heroku_5bb33fb5420e231",
     "host": "us-cdbr-east-02.cleardb.com",
-    "dialect": "mysql",
-    "logging": true
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
@@ -15,10 +14,11 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
+    "username": "bd2fd309ba353f",
+    "password":"40bb3c44",
     "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "host": "us-cdbr-east-02.cleardb.com",
+    "dialect": "mysql",
+    "use_env_variable": "DATABASE_URL"
   }
 }
