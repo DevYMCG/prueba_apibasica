@@ -27,34 +27,6 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING(2),
 		}
 	});
-
-	User.associate = models => {
-		User.belongsTo(models.Role, {
-			foreignkey: {
-				allowNull: false
-			}
-		});
-
-		User.belongsTo(models.Parent, {
-			foreignkey: {
-				allowNull: false
-			}
-		});
-
-		User.belongsTo(models.School, {
-			foreignkey: {
-				allowNull: false
-			}
-		});
-
-		User.hasMany(models.Users_Level, {
-			onDelete: "cascade"
-		});
-
-		User.hasMany(models.Challenge, {
-			onDelete: "cascade"
-		});
-	};
-
+	
 	return User;
 };
