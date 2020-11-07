@@ -61,6 +61,8 @@ var controller = {
 						}
 					// Limpiar el objto
 					user.password = undefined;
+					user.session = undefined;
+					user.status = undefined;
 
 					// Devolver respuesta
 					return res.status(200).send({
