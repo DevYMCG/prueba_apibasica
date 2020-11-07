@@ -9,5 +9,25 @@ module.exports = (sequelize, DataTypes) => {
 
 	});
 
+	Multimedia.associate = models => {
+		Multimedia.belongsTo(models.Types_multimedia, {
+				foreignkey: {
+					allowNull: false
+				}
+		});
+
+		Multimedia.hasMany(models.Game, {
+			onDelete: "cascade"
+		});
+
+		Multimedia.hasMany(models.Games_theme, {
+			onDelete: "cascade"
+		});
+
+		Multimedia.hasMany(models.Theme, {
+			onDelete: "cascade"
+		});
+	};
+
 	return Multimedia;
 };

@@ -15,5 +15,23 @@ module.exports = (sequelize, DataTypes) => {
 
 	});
 
+	Lesson.associate = models => {
+		Lesson.belongsTo(models.Theme, {
+				foreignkey: {
+					allowNull: false
+				}
+		});
+
+		Lesson.hasMany(models.Games_theme, {
+			onDelete: "cascade"
+		});
+
+		Lesson.belongsTo(models.Game, {
+				foreignkey: {
+					allowNull: false
+				}
+		});
+	};
+
 	return Lesson;
 };

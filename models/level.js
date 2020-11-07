@@ -6,5 +6,15 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	});
 
+	Level.associate = models => {
+		Level.hasMany(models.Users_Level, {
+			onDelete: "cascade"
+		});
+
+		Level.hasMany(models.Theme, {
+			onDelete: "cascade"
+		});
+	};
+
 	return Level;
 };

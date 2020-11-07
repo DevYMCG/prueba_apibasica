@@ -31,5 +31,22 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	});
 
+	Users_Level.associate = models => {
+		Users_Level.belongsTo(models.Level, {
+			foreignkey: {
+				allowNull: false
+			}
+		});
+
+		Users_Level.belongsTo(models.User, {
+			foreignkey: {
+				allowNull: false
+			}
+		});
+
+
+	};
+
+
 	return Users_Level;
 };

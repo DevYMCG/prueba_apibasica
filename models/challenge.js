@@ -8,6 +8,26 @@ module.exports = (sequelize, DataTypes) => {
 		}
 
 	});
+	
+	Challenge.associate = models => {
+		Challenge.belongsTo(models.User, {
+				foreignkey: {
+					allowNull: false
+				}
+		});
+
+		Challenge.belongsTo(models.School, {
+				foreignkey: {
+					allowNull: false
+				}
+		});
+
+		Challenge.belongsTo(models.Theme, {
+				foreignkey: {
+					allowNull: false
+				}
+		});
+	};
 
 	return Challenge;
 };

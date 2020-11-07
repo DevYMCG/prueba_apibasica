@@ -7,5 +7,20 @@ module.exports = (sequelize, DataTypes) => {
 
 	});
 	
+	Game.associate = models => {
+		Game.hasMany(models.Lesson, {
+			onDelete: "cascade"
+		});
+
+		Game.hasMany(models.Games_theme, {
+			onDelete: "cascade"
+		});
+
+		Game.belongsTo(models.Multimedia, {
+			 foreignKey: 'MultimediaId_video',
+			 allowNull: false
+		});
+	};
+	
 	return Game;
 };

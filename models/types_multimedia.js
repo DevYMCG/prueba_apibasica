@@ -7,5 +7,12 @@ module.exports = (sequelize, DataTypes) => {
 
 	});
 
+	Types_multimedia.associate = models => {
+
+		Types_multimedia.hasMany(models.Multimedia, {
+			onDelete: "cascade"
+		});
+	};
+
 	return Types_multimedia;
 };

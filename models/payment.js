@@ -8,5 +8,13 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	});
 
+	Payment.associate = models => {
+		Payment.belongsTo(models.School, {
+			foreignkey: {
+				allowNull: false
+			}
+		});
+	};
+
 	return Payment;
 };

@@ -8,6 +8,12 @@ module.exports = (sequelize, DataTypes) => {
 			}
 		}
 	});
+
+	Role.associate = models => {
+		Role.hasMany(models.User, {
+			onDelete: "cascade"
+		});
+	};
 	
 	return Role;
 };
