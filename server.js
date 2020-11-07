@@ -12,9 +12,11 @@ app.get('/', (req, res) => {
 });
 
 // cargar y resscribir rutas
-
 const apiRoutes = require("./routes/apiRoutes");
 app.use('/api', apiRoutes);
+
+const userRoutes = require("./routes/user-routes");
+app.use("/api", userRoutes);
 
 db.sequelize.sync().then(() => {
 	app.listen(PORT, () => {
