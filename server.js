@@ -24,6 +24,9 @@ app.use("/api", schoolRoutes);
 const roleRoutes = require("./routes/role-routes");
 app.use("/api", roleRoutes);
 
+const parentRoutes = require("./routes/parent-routes");
+app.use("/api", parentRoutes);
+
 db.sequelize.sync().then(() => {
 	app.listen(PORT, () => {
 		console.log(`listening on https://localhost:${PORT}`);
