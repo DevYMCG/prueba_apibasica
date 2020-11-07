@@ -74,6 +74,17 @@ var controller = {
 			message: 'La validacion de los datos son incorrectos, intentalo de nuevo'
 			});
 		}
-	}
+	},
+	getUsers: function(req, res){
+		db.User.findAll({
+		}).then(allusers => res.send(allusers));
+	},
+
+	getUser: function(req, res){
+		db.User.findAll({
+		 where: { id: req.params.id }
+		}).then(users => res.send(users));
+	},
+
 }
 module.exports = controller;
