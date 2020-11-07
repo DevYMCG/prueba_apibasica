@@ -149,7 +149,48 @@ var controller = {
 
 		});
 	},
-	
+
+		update: function(req, res){
+
+		// Recoger los datos del usuario
+		var params = req.body;
+
+		// validar datos
+		try{
+			var validate_loginname = !validator.isEmpty(params.loginname);
+			var validate_surname = !validator.isEmpty(params.surname);
+			var validate_name = !validator.isEmpty(params.name);
+		}catch(err){
+			return res.status(200).send({
+						message: 'Faltan datos por enviar'
+					});
+		}
+
+		// Eliminar propiedades innecesarias
+		delete params.password;
+
+		var userId = req.user.sub;
+
+		// Buscar y actualizar documento 
+		db.User.update(params, 
+				{ where: { id: userId }
+			}).then((result)=>{
+
+				if(!result){
+						return res.status(200).send({
+						status: 'error',
+						message: 'Error al actualizar'
+					});
+				}
+
+				//Devolver una respuesta
+				return res.status(200).send({
+					message: 'Metodo de actualizacion de datos',
+					result
+				});
+			});
+	},
+
 	getUsers: function(req, res){
 		db.User.findAll({
 		}).then(allusers => res.send(allusers));
