@@ -11,6 +11,10 @@ app.get('/', (req, res) => {
   res.send('Welcome to my API!');
 });
 
+// cargar y resscribir rutas
+const userRoutes = require("./routes/user-routes");
+app.use("/api", userRoutes);
+
 const apiRoutes = require("./routes/apiRoutes");
 app.use('/api', apiRoutes);
 
