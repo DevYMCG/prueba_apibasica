@@ -1,6 +1,7 @@
 const db = require('../models');
 var validator = require('validator');
 const bcrypt = require('bcrypt');
+var jwt = require('../services/jwt');
 
 var controller = {
 	save: function(req, res){
@@ -75,6 +76,80 @@ var controller = {
 			});
 		}
 	},
+
+	login: function(req, res){
+		// Recoger los parametros de la peticion
+		var params = req.body;
+
+		// Validar los datos
+		try{
+
+		var validate_loginame = !validator.isEmpty(params.loginname);
+		var validate_password = !validator.isEmpty(params.password);
+		}catch(err){
+			return res.status(200).send({
+						message: 'Faltan datos por enviar'
+					});
+		}
+
+		if(!validate_loginame || !validate_password){
+
+			return res.status(200).send({
+			message: 'Los datos son incorrectos'
+			});
+		}
+
+		// Buscar usuarios que coincidan con el loginname
+
+		db.User.findOne({
+				where: {
+					loginname: params.loginname
+				}
+			}).then(function(user){
+
+			if(!user){
+				return res.status(404).send({
+					message: 'El usuario no existe'
+				});
+			}
+			// Si la encuentra,
+
+			//Comprobar la contraseña(coincidencia de loginname y password / bcrypt)
+			bcrypt.compare(params.password, user.password, (err, result)=>{
+
+				// Si es correcto,
+				if(result){
+
+					// Generar el token de jwt y devolver
+
+					if(params.gettoken){
+
+						return res.status(200).send({
+							token: jwt.createToken(user)
+						});
+					}
+
+					//Limpiar el objeto
+					user.password = undefined;
+
+					// Devolver datos
+
+					return res.status(200).send({
+						message: 'Metodo de login',
+						user: user
+					});
+				}else{
+
+					return res.status(200).send({
+						message: 'Las credenciales no son correctas'
+					});
+				}
+
+			});
+
+		});
+	},
+	
 	getUsers: function(req, res){
 		db.User.findAll({
 		}).then(allusers => res.send(allusers));
