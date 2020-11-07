@@ -14,6 +14,10 @@ var controller = {
 			var validate_surname = !validator.isEmpty(params.surname);
 			var validate_name = !validator.isEmpty(params.name);
 			var validate_password = !validator.isEmpty(params.password);
+			var validate_parent = !validator.isEmpty(params.parentId);
+			var validate_role = !validator.isEmpty(params.roleId);
+			var validate_school = !validator.isEmpty(params.schoolId);
+
 		}catch(err){
 			return res.status(200).send({
 				message: 'Faltan datos por enviar'
@@ -32,9 +36,9 @@ var controller = {
 			user.session = 0;
 			user.url = params.url;
 			user.status = 'A';
-			user.ParentId = params.ParentId;
-			user.RoleId = params.RoleId;
-			user.SchoolId = params.SchoolId;
+			user.ParentId = params.parentId;
+			user.RoleId = params.roleId;
+			user.SchoolId = params.schoolId;
 
 			// Comprobar si el usuario existe
 			db.User.findOne({
