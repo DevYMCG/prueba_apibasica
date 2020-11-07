@@ -59,6 +59,8 @@ var controller = {
 							message: 'El usuario no se ha guardado'
 							});
 						}
+					// Limpiar el objto
+					user.password = undefined;
 
 					// Devolver respuesta
 					return res.status(200).send({
