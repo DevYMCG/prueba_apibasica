@@ -57,9 +57,9 @@ var controller = {
 								});
 							}
 
-							// Limpiar el objeto
-							user.newParent = undefined;
-
+							// Limpiar el objto
+							newParent.password = undefined;
+							
 							// Devolver respuesta
 							return res.status(200).send({
 								status: 'success',
