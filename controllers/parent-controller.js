@@ -57,6 +57,9 @@ var controller = {
 								});
 							}
 
+							// Limpiar el objeto
+							user.newParent = undefined;
+
 							// Devolver respuesta
 							return res.status(200).send({
 								status: 'success',
