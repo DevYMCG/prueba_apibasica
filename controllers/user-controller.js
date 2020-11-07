@@ -186,7 +186,7 @@ var controller = {
 				//Devolver una respuesta
 				return res.status(200).send({
 					message: 'Metodo de actualizacion de datos',
-					result
+					params
 				});
 			});
 	},
