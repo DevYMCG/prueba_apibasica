@@ -1,14 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
 	const Parent = sequelize.define("Parent", {
-		loginname: {
-			type: DataTypes.STRING(30),
-			allowNull: false,
-			unique: true
-		},
-		password: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
 		name: {
 			type: DataTypes.STRING(30),
 			allowNull: false,
