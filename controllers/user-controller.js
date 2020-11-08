@@ -163,15 +163,20 @@ var controller = {
 		// Recoger los datos del usuario
 		var params = req.body;
 
-		// validar datos
+		// Validar los datos 
 		try{
 			var validate_loginname = !validator.isEmpty(params.loginname);
 			var validate_surname = !validator.isEmpty(params.surname);
 			var validate_name = !validator.isEmpty(params.name);
+			var validate_password = !validator.isEmpty(params.password);
+			var validate_parent = !validator.isEmpty(params.parentId);
+			var validate_role = !validator.isEmpty(params.roleId);
+			var validate_school = !validator.isEmpty(params.schoolId);
+
 		}catch(err){
 			return res.status(400).send({
-						message: 'Faltan datos por enviar'
-					});
+				message: 'Faltan datos por enviar'
+			});
 		}
 
 		// Eliminar propiedades innecesarias
