@@ -19,7 +19,7 @@ var controller = {
 			var validate_school = !validator.isEmpty(params.schoolId);
 
 		}catch(err){
-			return res.status(200).send({
+			return res.status(400).send({
 				message: 'Faltan datos por enviar'
 			});
 		}
@@ -95,7 +95,7 @@ var controller = {
 		var validate_loginame = !validator.isEmpty(params.loginname);
 		var validate_password = !validator.isEmpty(params.password);
 		}catch(err){
-			return res.status(200).send({
+			return res.status(400).send({
 						message: 'Faltan datos por enviar'
 					});
 		}
@@ -169,7 +169,7 @@ var controller = {
 			var validate_surname = !validator.isEmpty(params.surname);
 			var validate_name = !validator.isEmpty(params.name);
 		}catch(err){
-			return res.status(200).send({
+			return res.status(400).send({
 						message: 'Faltan datos por enviar'
 					});
 		}

@@ -27,7 +27,6 @@ var controller = {
 			// Asignar valores al representante
 			school.rut = params.rut;
 			school.name = params.name;
-			school.picture = params.picture;
 			school.email = params.email;
 			school.address = params.address;
 			school.telephone = params.telephone;
