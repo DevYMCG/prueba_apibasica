@@ -20,7 +20,7 @@ var controller = {
 
 		}catch(err){
 			return res.status(400).send({
-				error: json(json_response)
+				message: 'Faltan datos por enviar'
 			});
 		}
 
@@ -59,7 +59,7 @@ var controller = {
 
 					user.save().then(function(newUser, created){
 						if(!newUser){
-							return res.status(200).send({
+							return res.status(400).send({
 							message: 'El usuario no se ha guardado'
 							});
 						}
@@ -80,7 +80,7 @@ var controller = {
 		 })
 		}else{
 			return res.status(400).send({
-			message: 'La validacion de los datos son incorrectos'
+			message: 'Validación de los datos del usuario, incorrecta, intentalo de nuevo'
 			});
 		}
 	},
