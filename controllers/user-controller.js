@@ -180,73 +180,39 @@ var controller = {
 		}
 
 		// Crear objeto de usuario
-		var user = new db.User();
+			var user = new db.User();
 
-		// Asignar valores de usuario
-		user.loginname = params.loginname;
-		user.surname = params.surname;
-		user.name = params.name;
-		user.password = params.password;
-		user.url = params.url;
-		user.ParentId = params.ParentId;
-		user.RoleId = params.RoleId;
-		user.SchoolId = params.SchoolId;
+			// Asignar valores de usuario
+			user.loginname = params.loginname;
+			user.surname = params.surname;
+			user.name = params.name;
+			user.password = params.password;
+			user.url = params.url;
+			user.ParentId = params.ParentId;
+			user.RoleId = params.RoleId;
+			user.SchoolId = params.SchoolId;
 
-		// Comprobar que el loginname sea unico
-		if(req.user.loginname != params.loginname){
+			var userId = req.user.sub;
+			
 
-			db.User.findOne({
-				where: {
-					loginname: params.loginname
-				}
-			}).then(function(user){
+		// Buscar y actualizar documento 
+		db.User.update(params, 
+			{ where: { id: userId }
+		}).then((result)=>{
 
-			if(!user){
-				return res.status(404).send({
-					message: 'El usuario no existe'
+			if(!result){
+					return res.status(500).send({
+					status: 'error',
+					message: 'Error al actualizar usuario'
 				});
-			 }
+			}
 
-			 //Comprobar la contraseña(coincidencia de loginname y password / bcrypt)
-			bcrypt.compare(params.password, user.password, (err, result)=>{
-
-				// Si es correcto,
-				if(result){
-
-					//Limpiar el objeto
-					user.password = undefined;
-
-					var userId = req.user.sub;
-
-					// Buscar y actualizar documento 
-					db.User.update(params, 
-						{ where: { id: userId }
-					}).then((result)=>{
-
-						if(!result){
-								return res.status(500).send({
-								status: 'error',
-								message: 'Error al actualizar usuario'
-							});
-						}
-
-						//Devolver una respuesta
-						return res.status(200).send({
-							message: 'Metodo de actualizacion de datos',
-							User: params
-						});
-					});
-				}else{
-
-					return res.status(200).send({
-						message: 'Las credenciales no son correctas'
-					});
-				}
-
+			//Devolver una respuesta
+			return res.status(200).send({
+				message: 'Metodo de actualizacion de datos',
+				User: params
 			});
-
-		  });
-		}
+		});
 	},
 
 	getUsers: function(req, res){
