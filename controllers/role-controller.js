@@ -18,12 +18,31 @@ var controller = {
 
 		if(validator_name){
 			// Guadar el role
-			 db.Role.create({
-			  name: params.name
-			 }).then(newRole => res.send(newRole));
+
+			//crear objeto del rol 
+			var role = new db.Role();
+
+			// Asignar valores al rol 
+			role.name = params.name;
+
+			role.save().then(function(newRole, created){
+				if(!newRole){
+					return res.status(200).send({
+						message: 'El rol no se ha guardado'
+					});
+				}
+
+				// Devolver respuesta
+				return res.status(201).send({
+					status: 'success',
+					Role: newRole
+				});
+			});
+
+
 		}else{
-			return res.status(200).send({
-			message: 'La validacion de los datos son incorrectos, intentalo de nuevo'
+			return res.status(400).send({
+			message: 'Validación de los datos del usuario, incorrecta'
 			});
 		}
 	},

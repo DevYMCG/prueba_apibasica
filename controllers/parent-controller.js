@@ -37,7 +37,7 @@ var controller = {
 				}
 
 				// Devolver respuesta
-				return res.status(200).send({
+				return res.status(201).send({
 					status: 'success',
 					Parent: newParent
 				});						
@@ -46,7 +46,7 @@ var controller = {
 			// Devolver respuesta
 		}else{
 			return res.status(400).send({
-			message: 'La validacion de los datos son incorrectos, intentalo de nuevo'
+			message: 'Validación de los datos del usuario, incorrecta'
 			});
 		}
 	},

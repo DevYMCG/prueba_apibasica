@@ -97,13 +97,13 @@ var controller = {
 		}catch(err){
 			return res.status(400).send({
 						message: 'Faltan datos por enviar'
-					});
+				});
 		}
 
 		if(!validate_loginame || !validate_password){
 
 			return res.status(400).send({
-			message: 'Los datos son incorrectos'
+			message: 'Validación de los datos del usuario, incorrecta'
 			});
 		}
 
