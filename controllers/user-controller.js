@@ -20,7 +20,7 @@ var controller = {
 
 		}catch(err){
 			return res.status(500).send({
-				message: 'Faltan datos por enviar'
+				message: 'Faltan datos por enviar 1'
 			});
 		}
 
