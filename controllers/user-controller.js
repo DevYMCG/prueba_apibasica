@@ -19,7 +19,7 @@ var controller = {
 			var validate_school = !validator.isEmpty(params.schoolId);
 
 		}catch(err){
-			return res.status(400).send({
+			return res.status(500).send({
 				message: 'Faltan datos por enviar'
 			});
 		}
@@ -49,7 +49,7 @@ var controller = {
 
 				if(issetUser){
 					return res.status(500).send({
-						message: 'El loginname ya existe'
+						message: 'Error al comprobar duplicidad del loginname'
 					});
 				}else{
 					// Si no existe, cifrar la contraseña y guardar
@@ -79,8 +79,8 @@ var controller = {
 				}
 		 })
 		}else{
-			return res.status(200).send({
-			message: 'La validacion de los datos son incorrectos, intentalo de nuevo'
+			return res.status(400).send({
+			message: 'La validacion de los datos son incorrectos'
 			});
 		}
 	},
@@ -102,7 +102,7 @@ var controller = {
 
 		if(!validate_loginame || !validate_password){
 
-			return res.status(200).send({
+			return res.status(400).send({
 			message: 'Los datos son incorrectos'
 			});
 		}

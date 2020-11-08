@@ -11,7 +11,7 @@ var controller = {
 		try{
 			var validator_name = !validator.isEmpty(params.name);
 		}catch(err){
-			return res.status(200).send({
+			return res.status(400).send({
 				message: 'Faltan datos por enviar'
 			});
 		}

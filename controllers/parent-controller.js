@@ -15,7 +15,7 @@ var controller = {
 			var validate_surname = !validator.isEmpty(params.surname);
 			var validate_email = validator.isEmail(params.email);
 		}catch(err){
-			return res.status(200).send({
+			return res.status(400).send({
 				message: 'Faltan datos por enviar'
 			});
 		}
@@ -45,7 +45,7 @@ var controller = {
 
 			// Devolver respuesta
 		}else{
-			return res.status(200).send({
+			return res.status(400).send({
 			message: 'La validacion de los datos son incorrectos, intentalo de nuevo'
 			});
 		}
