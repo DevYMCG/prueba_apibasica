@@ -217,7 +217,6 @@ var controller = {
 						User: params
 					});
 				});
-			}
 	},
 
 	getUsers: function(req, res){
