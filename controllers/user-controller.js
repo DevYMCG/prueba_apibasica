@@ -20,7 +20,7 @@ var controller = {
 
 		}catch(err){
 			return res.status(400).send({
-				error: err
+				error: json(json_response)
 			});
 		}
 
