@@ -179,10 +179,20 @@ var controller = {
 			});
 		}
 
-		// Eliminar propiedades innecesarias
-		delete params.password;
+		// Crear objeto de usuario
+			var user = new db.User();
 
-		var userId = req.user.sub;
+			// Asignar valores de usuario
+			user.loginname = params.loginname;
+			user.surname = params.surname;
+			user.name = params.name;
+			user.password = params.password;
+			user.url = params.url;
+			user.ParentId = params.ParentId;
+			user.RoleId = params.RoleId;
+			user.SchoolId = params.SchoolId;
+
+			var userId = req.user.sub;
 
 		// Buscar y actualizar documento 
 		db.User.update(params, 
