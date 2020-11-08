@@ -19,8 +19,8 @@ var controller = {
 			var validate_school = !validator.isEmpty(params.schoolId);
 
 		}catch(err){
-			return res.status(500).send({
-				message: 'Faltan datos por enviar 1'
+			return res.status(400).send({
+				error: err
 			});
 		}
 
@@ -69,7 +69,7 @@ var controller = {
 					user.status = undefined;
 
 					// Devolver respuesta
-					return res.status(200).send({
+					return res.status(201).send({
 						status: 'success',
 						user: newUser
 					});						
