@@ -192,13 +192,13 @@ var controller = {
 
 				if(user){
 					return res.status(404).send({
-						message: 'El loginname puede ser modificado'
+						message: 'El loginname no puede ser modificado'
 					});
 				}
 
 				if(!user){
 					return res.status(404).send({
-						message: 'El loginname no puede ser modificado'
+						message: 'El loginname puede ser modificado'
 					});
 				}
 			  });
