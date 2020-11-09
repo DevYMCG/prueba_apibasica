@@ -195,7 +195,7 @@ var controller = {
 						message: 'El loginname ya existe'
 					});
 				}
-			  }
+			  });
 			}
 
 			// Asignar valores de usuario
