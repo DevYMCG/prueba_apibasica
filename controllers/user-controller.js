@@ -184,47 +184,39 @@ var controller = {
 
 			// Comrpobar que el loginame es unico
 			if(req.user.loginname != params.loginname){
+				
+			}
 
-				db.User.findOne({
-				where: {
-					loginname: user.loginname
-				}
-			}).then(function(issetUser){
+			// Asignar valores de usuario
+			user.loginname = params.loginname;
+			user.surname = params.surname;
+			user.name = params.name;
+			user.password = params.password;
+			user.url = params.url;
+			user.ParentId = params.ParentId;
+			user.RoleId = params.RoleId;
+			user.SchoolId = params.SchoolId;
 
-				if(issetUser){
-					return res.status(500).send({
-						message: 'Error al comprobar duplicidad del loginname'
-					});
-				}else{
-					// Si no existe, cifrar la contraseña y guardar
-					bcrypt.hash(params.password, 10, function(err, hash){
-					user.password = hash;
-					//guardar usuario 
-					var userId = req.user.sub;
-					
-						db.User.update(params, 
-							{ where: { id: userId }
-						}).then((result)=>{
+			var userId = req.user.sub;
 
-							if(!result){                                        
-									return res.status(500).send({
-									status: 'error',
-									message: 'Error al actualizar usuario'
-								});
-							}
+			// Buscar y actualizar documento 
+			db.User.update(params, 
+				{ where: { id: userId }
+			}).then((result)=>{
 
-							//Devolver una respuesta
-							return res.status(200).send({
-								message: 'Metodo de actualizacion de datos',
-								User: params
-							});
-						});
-					
+				if(!result){                                        
+						return res.status(500).send({
+						status: 'error',
+						message: 'Error al actualizar usuario'
 					});
 				}
+
+				//Devolver una respuesta
+				return res.status(200).send({
+					message: 'Metodo de actualizacion de datos',
+					User: params
+				});
 			});
-		 }
-			
 	},
 
 	getUsers: function(req, res){
