@@ -188,7 +188,7 @@ var controller = {
 					}
 				}).then(function(user){
 
-				if(user || user.loginname == params.loginname){
+				if(user && user.loginname == params.loginname){
 					return res.status(200).send({
 						message: 'El loginname ya existe'
 					});
