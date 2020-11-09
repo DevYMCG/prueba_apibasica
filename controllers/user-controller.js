@@ -216,7 +216,8 @@ var controller = {
 						message: 'Metodo de actualizacion de datos',
 						User: params
 					});
-				});
+				}
+			});
 	},
 
 	getUsers: function(req, res){
