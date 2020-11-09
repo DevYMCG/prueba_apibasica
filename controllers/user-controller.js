@@ -181,6 +181,10 @@ var controller = {
 
 			var userId = req.user.sub;
 
+			return res.status(200).send({
+						message: req.user.loginname
+					});
+
 			// Comrpobar que el loginame es unico
 			if(req.user.loginname != params.loginname){
 				db.User.findOne({
@@ -191,7 +195,7 @@ var controller = {
 
 				if(user && user.loginname == params.loginname){
 					return res.status(200).send({
-						message: 'El loginname no puede ser modificado',
+						message: 'El loginname no puede ser modificado'
 					});
 				}
 
