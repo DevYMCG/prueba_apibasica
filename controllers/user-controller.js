@@ -182,6 +182,16 @@ var controller = {
 		// Crear objeto de usuario
 			var user = new db.User();
 
+			// Comrpobar que el loginame es unico
+			if(req.user.loginname != params.loginname){
+				return res.status(500).send({
+				status: 'diferentes',
+				message: 'Error al actualizar usuario'
+				});
+			}else{
+				status: 'iguales'
+			}
+
 			// Asignar valores de usuario
 			user.loginname = params.loginname;
 			user.surname = params.surname;
@@ -199,7 +209,7 @@ var controller = {
 				{ where: { id: userId }
 			}).then((result)=>{
 
-				if(!result){
+				if(!result){                                        
 						return res.status(500).send({
 						status: 'error',
 						message: 'Error al actualizar usuario'
