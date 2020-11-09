@@ -183,7 +183,7 @@ var controller = {
 			var user = new db.User();
 
 			// Comrpobar que el loginame es unico
-			if(validator.equals(req.user.loginname, params.loginname)){
+			if(!validator.equals(req.user.loginname, params.loginname)){
 					// Asignar valores de usuario
 				user.loginname = params.loginname;
 				user.surname = params.surname;
