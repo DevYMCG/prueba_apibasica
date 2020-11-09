@@ -184,7 +184,18 @@ var controller = {
 
 			// Comrpobar que el loginame es unico
 			if(req.user.loginname != params.loginname){
-				
+				db.User.findOne({
+					where: {
+						loginname: params.loginname
+					}
+				}).then(function(user){
+
+				if(!user){
+					return res.status(404).send({
+						message: 'El loginname ya existe'
+					});
+				}
+			  }
 			}
 
 			// Asignar valores de usuario
