@@ -183,12 +183,10 @@ var controller = {
 			var user = new db.User();
 
 			// Comrpobar que el loginame es unico
-			if(req.user.loginname != params.loginname){
+			if(validator.equals(req.user.loginname != params.loginname)){
 				return res.status(500).send({
 				status: 'diferentes',
-				message: 'Error al actualizar usuario',
-				req.user.loginname,
-				params.loginname
+				message: 'Error al actualizar usuario'
 				});
 			}else{
 				return res.status(500).send({
