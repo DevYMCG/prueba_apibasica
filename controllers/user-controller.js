@@ -243,9 +243,12 @@ var controller = {
 
 	uploadAvatar: function(req, res){
 
-		// Configurar el modulo multiparty
+		// Configurar el modulo multiparty (md) routes/user.js
 
 		// Recoger el fichero de la peticion
+		var file_name = 'Avatar no subido...'
+
+		console.log(req.files);
 
 		// Conseguir el nombre y la extencion del archivo subido
 
