@@ -192,20 +192,20 @@ var controller = {
 					return res.status(200).send({
 						message: 'El loginname ya existe'
 					});
-
-					// Buscar y actualizar documento 
-					db.User.update(params, 
-						{ where: { id: userId }
-					}).then((result)=>{
-
-						if(!result){                                        
-								return res.status(500).send({
-								status: 'error',
-								message: 'Error al actualizar usuario'
-							});
-						}
-					});
 				}
+
+				// Buscar y actualizar documento 
+				db.User.update(params, 
+					{ where: { id: userId }
+				}).then((result)=>{
+
+					if(!result){                                        
+							return res.status(500).send({
+							status: 'error',
+							message: 'Error al actualizar usuario'
+						});
+					}
+				});
 
 			  });
 			}else{
