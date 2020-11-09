@@ -179,8 +179,7 @@ var controller = {
 			});
 		}
 
-		// Crear objeto de usuario
-			var user = new db.User();
+			var userId = req.user.sub;
 
 			// Comrpobar que el loginame es unico
 			if(req.user.loginname != params.loginname){
@@ -193,7 +192,6 @@ var controller = {
 				if(user && user.loginname == params.loginname){
 					return res.status(200).send({
 						message: 'El loginname no puede ser modificado',
-						user.loginname
 					});
 				}
 
@@ -205,17 +203,6 @@ var controller = {
 			  });
 			}
 
-			// Asignar valores de usuario
-			user.loginname = params.loginname;
-			user.surname = params.surname;
-			user.name = params.name;
-			user.password = params.password;
-			user.url = params.url;
-			user.ParentId = params.ParentId;
-			user.RoleId = params.RoleId;
-			user.SchoolId = params.SchoolId;
-
-			var userId = req.user.sub;
 
 			// Buscar y actualizar documento 
 			db.User.update(params, 
