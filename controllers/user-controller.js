@@ -190,9 +190,15 @@ var controller = {
 					}
 				}).then(function(user){
 
+				if(user){
+					return res.status(404).send({
+						message: 'El loginname puede ser modificado'
+					});
+				}
+
 				if(!user){
 					return res.status(404).send({
-						message: 'El loginname ya existe'
+						message: 'El loginname no puede ser modificado'
 					});
 				}
 			  });
