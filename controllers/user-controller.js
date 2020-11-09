@@ -180,10 +180,6 @@ var controller = {
 
 			var userId = req.user.sub;
 
-			return res.status(200).send({
-						message: req.user.loginname
-					});
-
 			// Comrpobar que el loginame es unico
 			if(req.user.loginname != params.loginname){
 				db.User.findOne({
