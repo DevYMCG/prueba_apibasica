@@ -158,8 +158,9 @@ var controller = {
 		});
 	},
 
-	update: function(req, res){
-		// Recoger los parametros de la peticion
+		update: function(req, res){
+
+		// Recoger los datos del usuario
 		var params = req.body;
 
 		// Validar los datos 
@@ -178,8 +179,7 @@ var controller = {
 			});
 		}
 
-		if(validate_loginname && validate_surname && validate_name && validate_password){
-			// Crear objeto de usuario
+		// Crear objeto de usuario
 			var user = new db.User();
 
 			// Asignar valores de usuario
@@ -188,52 +188,30 @@ var controller = {
 			user.name = params.name;
 			user.password = params.password;
 			user.url = params.url;
-			user.ParentId = params.parentId;
-			user.RoleId = params.roleId;
-			user.SchoolId = params.schoolId;
+			user.ParentId = params.ParentId;
+			user.RoleId = params.RoleId;
+			user.SchoolId = params.SchoolId;
 
-			// Comprobar si el usuario existe
-			db.User.findOne({
-				where: {
-					loginname: user.loginname
-				}
-			}).then(function(issetUser){
+			var userId = req.user.sub;
 
-				if(issetUser){
-					return res.status(500).send({
-						message: 'Error al comprobar duplicidad del loginname'
+			// Buscar y actualizar documento 
+			db.User.update(params, 
+				{ where: { id: userId }
+			}).then((result)=>{
+
+				if(!result){
+						return res.status(500).send({
+						status: 'error',
+						message: 'Error al actualizar usuario'
 					});
-				}else{
-					// Si no existe, cifrar la contraseña y guardar
-					bcrypt.hash(params.password, 10, function(err, hash){
-					user.password = hash;
-					//guardar usuario 
-
-					user.save().then(function(newUser, created){
-						if(!newUser){
-							return res.status(400).send({
-							message: 'El usuario no se ha guardado'
-							});
-						}
-					// Limpiar el objto
-					user.password = undefined;
-
-					// Devolver respuesta
-					return res.status(201).send({
-						status: 'success',
-						user: newUser
-					});						
-				});
-				
-				});
 				}
-		 })
-		}else{
-			return res.status(400).send({
-			message: 'Validación de los datos del usuario, incorrecta, intentalo de nuevo'
-			});
-		}
 
+				//Devolver una respuesta
+				return res.status(200).send({
+					message: 'Metodo de actualizacion de datos',
+					User: params
+				});
+			});
 	},
 
 	getUsers: function(req, res){
