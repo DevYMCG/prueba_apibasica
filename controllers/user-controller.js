@@ -184,9 +184,35 @@ var controller = {
 
 			// Comrpobar que el loginame es unico
 			if(validator.equals(req.user.loginname, params.loginname)){
-				return res.status(500).send({
-				status: 'diferentes',
-				message: 'Error al actualizar usuario'
+					// Asignar valores de usuario
+				user.loginname = params.loginname;
+				user.surname = params.surname;
+				user.name = params.name;
+				user.password = params.password;
+				user.url = params.url;
+				user.ParentId = params.ParentId;
+				user.RoleId = params.RoleId;
+				user.SchoolId = params.SchoolId;
+
+				var userId = req.user.sub;
+
+				// Buscar y actualizar documento 
+				db.User.update(params, 
+					{ where: { id: userId }
+				}).then((result)=>{
+
+					if(!result){                                        
+							return res.status(500).send({
+							status: 'error',
+							message: 'Error al actualizar usuario'
+						});
+					}
+
+					//Devolver una respuesta
+					return res.status(200).send({
+						message: 'Metodo de actualizacion de datos',
+						User: params
+					});
 				});
 			}else{
 				return res.status(500).send({
@@ -194,37 +220,6 @@ var controller = {
 				message: 'Error al actualizar usuario'
 				});
 			}
-
-			// Asignar valores de usuario
-			user.loginname = params.loginname;
-			user.surname = params.surname;
-			user.name = params.name;
-			user.password = params.password;
-			user.url = params.url;
-			user.ParentId = params.ParentId;
-			user.RoleId = params.RoleId;
-			user.SchoolId = params.SchoolId;
-
-			var userId = req.user.sub;
-
-			// Buscar y actualizar documento 
-			db.User.update(params, 
-				{ where: { id: userId }
-			}).then((result)=>{
-
-				if(!result){                                        
-						return res.status(500).send({
-						status: 'error',
-						message: 'Error al actualizar usuario'
-					});
-				}
-
-				//Devolver una respuesta
-				return res.status(200).send({
-					message: 'Metodo de actualizacion de datos',
-					User: params
-				});
-			});
 	},
 
 	getUsers: function(req, res){
