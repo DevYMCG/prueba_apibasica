@@ -186,10 +186,15 @@ var controller = {
 			if(req.user.loginname != params.loginname){
 				return res.status(500).send({
 				status: 'diferentes',
-				message: 'Error al actualizar usuario'
+				message: 'Error al actualizar usuario',
+				req.user.loginname,
+				params.loginname
 				});
 			}else{
-				status: 'iguales'
+				return res.status(500).send({
+				status: 'iguales',
+				message: 'Error al actualizar usuario'
+				});
 			}
 
 			// Asignar valores de usuario
