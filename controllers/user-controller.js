@@ -242,7 +242,20 @@ var controller = {
 	},
 
 	uploadAvatar: function(req, res){
-		//Devolver una respuesta
+
+		// Configurar el modulo multiparty
+
+		// Recoger el fichero de la peticion
+
+		// Conseguir el nombre y la extencion del archivo subido
+
+		// Comprobar extencion (solo imagenes), si no es valida borrar fichero subido
+
+		// Obtener el id del usuario identificado
+
+		//Buscar y actualizar documentos 
+
+		// Devolver respuesta
 			return res.status(200).send({
 				message: 'Upload Avatar'
 			});
