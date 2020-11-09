@@ -192,7 +192,7 @@ var controller = {
 					return res.status(200).send({
 						message: 'El loginname ya existe'
 					});
-				}
+				}else{
 
 				// Buscar y actualizar documento 
 				db.User.update(params, 
@@ -206,6 +206,8 @@ var controller = {
 						});
 					}
 				});
+
+			   }
 
 			  });
 			}else{
