@@ -9,5 +9,6 @@ router.post('/login', UserController.login);
 router.put('/update', md_auth.authenticate,UserController.update);
 router.get('/users', UserController.getUsers);
 router.get('/user/:id', UserController.getUser);
+router.post('/upload-avatar', UserController.uploadAvatar);
 
 module.exports = router;

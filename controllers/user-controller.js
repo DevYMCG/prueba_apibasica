@@ -241,6 +241,14 @@ var controller = {
 		}
 	},
 
+	uploadAvatar: function(req, res){
+		//Devolver una respuesta
+			return res.status(200).send({
+				message: 'Upload Avatar',
+				User: params
+			});
+	},
+
 	getUsers: function(req, res){
 		db.User.findAll({
 		}).then(allusers => res.send(allusers));
