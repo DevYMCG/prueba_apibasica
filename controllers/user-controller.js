@@ -205,11 +205,24 @@ var controller = {
 							});
 						}
 
-						//Devolver una respuesta
-						return res.status(200).send({
-							message: 'Metodo de actualizacion de datos',
-							User: params
-						});
+						// Buscar y actualizar documento 
+							db.User.update(params, 
+								{ where: { id: userId }
+							}).then((result)=>{
+
+								if(!result){                                        
+										return res.status(500).send({
+										status: 'error',
+										message: 'Error al actualizar usuario'
+									});
+								}
+
+								//Devolver una respuesta
+								return res.status(200).send({
+									message: 'Metodo de actualizacion de datos',
+									User: params
+								});
+							});
 					});
 				}
 
