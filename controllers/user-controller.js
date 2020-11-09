@@ -244,8 +244,7 @@ var controller = {
 	uploadAvatar: function(req, res){
 		//Devolver una respuesta
 			return res.status(200).send({
-				message: 'Upload Avatar',
-				User: params
+				message: 'Upload Avatar'
 			});
 	},
 
