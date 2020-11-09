@@ -160,64 +160,6 @@ var controller = {
 
 		update: function(req, res){
 
-		// Recoger los datos del usuario
-		var params = req.body;
-
-		// Validar los datos 
-		try{
-			var validate_loginname = !validator.isEmpty(params.loginname);
-			var validate_surname = !validator.isEmpty(params.surname);
-			var validate_name = !validator.isEmpty(params.name);
-			var validate_password = !validator.isEmpty(params.password);
-			var validate_parent = !validator.isEmpty(params.parentId);
-			var validate_role = !validator.isEmpty(params.roleId);
-			var validate_school = !validator.isEmpty(params.schoolId);
-
-		}catch(err){
-			return res.status(400).send({
-				message: 'Faltan datos por enviar'
-			});
-		}
-
-		// Crear objeto de usuario
-			var user = new db.User();
-
-			// Asignar valores de usuario
-			user.loginname = params.loginname;
-			user.surname = params.surname;
-			user.name = params.name;
-			user.password = params.password;
-			user.url = params.url;
-			user.ParentId = params.ParentId;
-			user.RoleId = params.RoleId;
-			user.SchoolId = params.SchoolId;
-
-			var userId = req.user.sub;
-
-			// cifrar contraseña y guardar
-
-			bcrypt.hash(params.password, 10, function(err, hash){
-				user.password = hash;
-
-				// Guardar usuario 
-				db.User.update(params, 
-					{ where: { id: userId }
-				}).then((result)=>{
-
-					if(!result){
-							return res.status(500).send({
-							status: 'error',
-							message: 'Error al actualizar usuario'
-						});
-					}
-
-					//Devolver una respuesta
-					return res.status(200).send({
-						message: 'Metodo de actualizacion de datos',
-						User: params
-					});
-				}
-			});
 	},
 
 	getUsers: function(req, res){
