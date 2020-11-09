@@ -189,19 +189,14 @@ var controller = {
 					}
 				}).then(function(user){
 
-				if(user && user.loginname != params.loginname){
+				if(user && user.loginname == params.loginname){
 					return res.status(200).send({
 						message: 'El loginname no puede ser modificado',
 					});
 				}
 
-				if(!user){
-					return res.status(404).send({
-						message: 'El loginname puede ser modificado'
-					});
-				}
 			  });
-			}
+			}else{
 
 
 			// Buscar y actualizar documento 
@@ -222,6 +217,7 @@ var controller = {
 					User: params
 				});
 			});
+		}
 	},
 
 	getUsers: function(req, res){
