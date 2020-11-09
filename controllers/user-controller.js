@@ -190,8 +190,8 @@ var controller = {
 					}
 				}).then(function(user){
 
-				if(user){
-					return res.status(404).send({
+				if(user && user.loginame != params.loginname){
+					return res.status(200).send({
 						message: 'El loginname no puede ser modificado'
 					});
 				}
