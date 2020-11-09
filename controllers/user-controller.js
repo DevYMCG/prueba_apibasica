@@ -183,43 +183,48 @@ var controller = {
 			var user = new db.User();
 
 			// Comrpobar que el loginame es unico
-			if(!validator.equals(req.user.loginname, params.loginname)){
-					// Asignar valores de usuario
-				user.loginname = params.loginname;
-				user.surname = params.surname;
-				user.name = params.name;
-				user.password = params.password;
-				user.url = params.url;
-				user.ParentId = params.ParentId;
-				user.RoleId = params.RoleId;
-				user.SchoolId = params.SchoolId;
+			if(req.user.loginname != params.loginname){
 
-				var userId = req.user.sub;
+				db.User.findOne({
+				where: {
+					loginname: user.loginname
+				}
+			}).then(function(issetUser){
 
-				// Buscar y actualizar documento 
-				db.User.update(params, 
-					{ where: { id: userId }
-				}).then((result)=>{
-
-					if(!result){                                        
-							return res.status(500).send({
-							status: 'error',
-							message: 'Error al actualizar usuario'
-						});
-					}
-
-					//Devolver una respuesta
-					return res.status(200).send({
-						message: 'Metodo de actualizacion de datos',
-						User: params
+				if(issetUser){
+					return res.status(500).send({
+						message: 'Error al comprobar duplicidad del loginname'
 					});
-				});
-			}else{
-				return res.status(500).send({
-				status: 'iguales',
-				message: 'Error al actualizar usuario'
-				});
-			}
+				}else{
+					// Si no existe, cifrar la contraseña y guardar
+					bcrypt.hash(params.password, 10, function(err, hash){
+					user.password = hash;
+					//guardar usuario 
+					var userId = req.user.sub;
+					
+						db.User.update(params, 
+							{ where: { id: userId }
+						}).then((result)=>{
+
+							if(!result){                                        
+									return res.status(500).send({
+									status: 'error',
+									message: 'Error al actualizar usuario'
+								});
+							}
+
+							//Devolver una respuesta
+							return res.status(200).send({
+								message: 'Metodo de actualizacion de datos',
+								User: params
+							});
+						});
+					
+					});
+				}
+			});
+		 }
+			
 	},
 
 	getUsers: function(req, res){
