@@ -190,7 +190,7 @@ var controller = {
 
 				if(user && user.loginname == params.loginname){
 					return res.status(200).send({
-						message: 'El loginname no puede ser modificado'
+						message: 'El loginname ya existe'
 					});
 
 					// Buscar y actualizar documento 
@@ -204,25 +204,6 @@ var controller = {
 								message: 'Error al actualizar usuario'
 							});
 						}
-
-						// Buscar y actualizar documento 
-							db.User.update(params, 
-								{ where: { id: userId }
-							}).then((result)=>{
-
-								if(!result){                                        
-										return res.status(500).send({
-										status: 'error',
-										message: 'Error al actualizar usuario'
-									});
-								}
-
-								//Devolver una respuesta
-								return res.status(200).send({
-									message: 'Metodo de actualizacion de datos',
-									User: params
-								});
-							});
 					});
 				}
 
