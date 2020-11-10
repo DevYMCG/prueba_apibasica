@@ -287,7 +287,8 @@ var controller = {
 		 var userId = req.user.sub;
 
 		// Buscar y actualizar documento 
-			db.User.update(url: file_name, 
+			db.User.update(
+				{ url: file_name }, 
 				{ where: { id: userId }
 			}).then((result)=>{
 
