@@ -61,9 +61,16 @@ var controller = {
 	},
 
 	delete: function(req, res){
-		return res.status(400).send({
-			message: 'Metodo de borrado de rol'
-			});
+
+		// Sacar el id del post de la url
+		var topicId = req.params.id;
+
+		// Delete the role
+		db.Role.destroy({
+			where: {
+				id: topicId
+			}
+		}).then( roleRemoved => res.send(roleRemoved));
 	}
 
 }
