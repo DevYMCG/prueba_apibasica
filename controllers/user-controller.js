@@ -281,8 +281,8 @@ var controller = {
 					message: 'La extensión del archivo no es válida.'
 				});
 			});
-		}
-
+		}else{
+			
 		// Obtener el id del usuario identificado
 
 		//Buscar y actualizar documentos 
@@ -293,6 +293,7 @@ var controller = {
 				message: 'Upload Avatar',
 				file_ext
 			});
+		}
 	},
 
 	getUsers: function(req, res){
