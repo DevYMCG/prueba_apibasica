@@ -246,7 +246,7 @@ var controller = {
 		// Configurar el modulo multiparty (md) routes/user.js
 
 		// Recoger el fichero de la peticion
-		var file_name = 'Avatar no subido...'
+		var file_name = 'Avatar no subido...';
 
 		console.log(req.files);
 
