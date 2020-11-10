@@ -274,13 +274,13 @@ var controller = {
 		// Comprobar extencion (solo imagenes), si no es valida borrar fichero subido
 		if(file_ext != 'png' && file_ext != 'jpg' && file_ext != 'jpeg' && file_ext != 'gif'){
 			//limpiar 
-			fs.unlink(file_path, (err) => ){
+			fs.unlink(file_path, (err) =>{
 				// Devolver respuesta
 				return res.status(200).send({
 					status: 'error',
 					message: 'La extensión del archivo no es válida.'
 				});
-			}
+			});
 		}
 
 		// Obtener el id del usuario identificado
