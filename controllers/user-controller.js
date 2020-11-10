@@ -257,7 +257,7 @@ var controller = {
 
 		// Conseguir el nombre y la extencion del archivo subido
 		var file_path = req.files.file0.path;
-		console.log(file_path);
+		var file_split = file_path.split('/');
 
 		// Comprobar extencion (solo imagenes), si no es valida borrar fichero subido
 
@@ -269,7 +269,7 @@ var controller = {
 			return res.status(200).send({
 				status: 'success',
 				message: 'Upload Avatar',
-				file_path
+				file_split
 			});
 	},
 
