@@ -1,6 +1,8 @@
 const db = require('../models');
 var validator = require('validator');
-const bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
+var fs = require('fs');
+var path = require('path');
 var jwt = require('../services/jwt');
 
 var controller = {
@@ -270,6 +272,16 @@ var controller = {
 		var file_ext = ext_split[1];
 
 		// Comprobar extencion (solo imagenes), si no es valida borrar fichero subido
+		if(file_ext != 'png' && file_ext != 'jpg' && file_ext != 'jpeg' && file_ext != 'gif'){
+			//limpiar 
+			fs.unlink(file_path, (err) => ){
+				// Devolver respuesta
+				return res.status(200).send({
+					status: 'error',
+					message: 'La extensión del archivo no es válida.'
+				});
+			}
+		}
 
 		// Obtener el id del usuario identificado
 
