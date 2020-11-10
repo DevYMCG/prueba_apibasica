@@ -70,7 +70,22 @@ var controller = {
 			where: {
 				id: topicId
 			}
-		}).then( roleRemoved => res.send(roleRemoved));
+		}).then((roleRemoved) => {
+
+			if(!roleRemoved){                                        
+				return res.status(404).send({
+					status: 'Error',
+					message: 'El usuario no existe'
+				});
+			}
+
+			//Devolver una respuesta
+			return res.status(200).send({
+				message: 'Eliminado correct',
+				role: roleRemoved
+			});
+
+		});
 	}
 
 }
