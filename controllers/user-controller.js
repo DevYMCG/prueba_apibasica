@@ -290,7 +290,7 @@ var controller = {
 			db.User.update(
 				{ url: file_name }, 
 				{ where: { id: userId }
-			}).then((result)=>{
+			}).then((result )=>{
 
 				if(!result){                                        
 						return res.status(500).send({
@@ -302,8 +302,7 @@ var controller = {
 				//Devolver una respuesta
 					return res.status(200).send({
 					status: 'success',
-					message: 'Upload Avatar',
-					user: db.User
+					message: 'El avatar se ha actualizado correctamente'
 				});
 			});
 		}
