@@ -248,9 +248,16 @@ var controller = {
 		// Recoger el fichero de la peticion
 		var file_name = 'Avatar no subido...';
 
-		console.log(req.files);
+		if(!req.files){
+			return res.status(404).send({
+				status: 'error',
+				message: file_name
+			});
+		}
 
 		// Conseguir el nombre y la extencion del archivo subido
+		var file_path = req.files.file0.path;
+		console.log(file_path);
 
 		// Comprobar extencion (solo imagenes), si no es valida borrar fichero subido
 
@@ -260,7 +267,9 @@ var controller = {
 
 		// Devolver respuesta
 			return res.status(200).send({
-				message: 'Upload Avatar'
+				status: 'success',
+				message: 'Upload Avatar',
+				file_path
 			});
 	},
 
