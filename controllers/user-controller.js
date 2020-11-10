@@ -267,7 +267,7 @@ var controller = {
 
 		// Extension del archivo
 		var ext_split = file_name.split('\.');
-		var file_ext = ext_split[2];
+		var file_ext = ext_split[1];
 
 		// Comprobar extencion (solo imagenes), si no es valida borrar fichero subido
 
