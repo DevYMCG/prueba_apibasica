@@ -60,6 +60,12 @@ var controller = {
 		}).then(allroles => res.send(allroles));
 	},
 
+	delete: function(req, res){
+		return res.status(400).send({
+			message: 'Metodo de borrado de rol'
+			});
+	}
+
 }
 
 module.exports = controller;
