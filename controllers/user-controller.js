@@ -259,6 +259,16 @@ var controller = {
 		var file_path = req.files.file0.path;
 		var file_split = file_path.split('/');
 
+		// **ADVERTENCIA** En windows
+		//var file_split = file_path.split('//');
+
+		// Nombre del archivo
+		var file_name = file_split[2];
+
+		// Extension del archivo
+		var ext_split = file_name.split('\.');
+		var file_ext = ext_split[2];
+
 		// Comprobar extencion (solo imagenes), si no es valida borrar fichero subido
 
 		// Obtener el id del usuario identificado
@@ -269,7 +279,7 @@ var controller = {
 			return res.status(200).send({
 				status: 'success',
 				message: 'Upload Avatar',
-				file_split
+				file_ext
 			});
 	},
 
