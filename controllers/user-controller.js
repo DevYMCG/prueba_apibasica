@@ -282,16 +282,28 @@ var controller = {
 				});
 			});
 		}else{
-			
+
 		// Obtener el id del usuario identificado
+		 var userId = req.user.sub;
 
-		//Buscar y actualizar documentos 
+		// Buscar y actualizar documento 
+			db.User.update(url: file_name, 
+				{ where: { id: userId }
+			}).then((result)=>{
 
-		// Devolver respuesta
-			return res.status(200).send({
-				status: 'success',
-				message: 'Upload Avatar',
-				file_ext
+				if(!result){                                        
+						return res.status(500).send({
+						status: 'error',
+						message: 'Error al actualizar usuario'
+					});
+				}
+
+				//Devolver una respuesta
+					return res.status(200).send({
+					status: 'success',
+					message: 'Upload Avatar',
+					user : result
+				});
 			});
 		}
 	},
