@@ -314,9 +314,27 @@ var controller = {
 	},
 
 	getUser: function(req, res){
-		db.User.findAll({
-		 where: { id: req.params.id }
-		}).then(users => res.send(users));
+	        db.User.findAll({
+	        where: {
+	            id: req.params.id
+	        }
+            })
+            .then(function(getuser) {
+
+                // Comprobar si el array esta vacio
+                if (getuser.length == 0) {
+                    return res.status(404).send({
+                        status: 'El usuario no existe'
+                    });
+                }
+
+                // Devolver respuesta
+                return res.status(200).send({
+                    status: 'success',
+                    User: getuser
+                });
+            })
+            .catch(error => res.status(400).send(error))
 	},
 
 }
