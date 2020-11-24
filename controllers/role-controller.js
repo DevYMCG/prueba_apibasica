@@ -42,15 +42,33 @@ var controller = {
 
 		}else{
 			return res.status(400).send({
-			message: 'Validación de los datos del usuario, incorrecta'
+			message: 'Validación de los datos del rol, incorrecta'
 			});
 		}
 	},
 
 	getRole: function(req, res){
 		db.Role.findAll({
-		 where: { id: req.params.id }
-		}).then(role => res.send(role));
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(function(getrole) {
+
+                // Comprobar si el array esta vacio
+                if (getrole.length == 0) {
+                    return res.status(404).send({
+                        status: 'El rol no existe'
+                    });
+                }
+
+                // Devolver respuesta
+                return res.status(201).send({
+                    status: 'success',
+                    getrole
+                });
+            })
+            .catch(error => res.status(400).send(error))
 	},
 
 	// obtener todos los roles de la base de datos
@@ -75,14 +93,14 @@ var controller = {
 			if(!roleRemoved){                                        
 				return res.status(404).send({
 					status: 'Error',
-					message: 'El usuario no existe'
+					message: 'El Rol no existe'
 				});
 			}
 
 			//Devolver una respuesta
 			return res.status(200).send({
-				message: 'Eliminado correct',
-				role: roleRemoved
+				status: 'success',
+				message: 'El Rol fue eliminado '
 			});
 
 		});
