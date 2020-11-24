@@ -52,9 +52,27 @@ var controller = {
 	},
 	
 	getParent: function(req, res){
-		db.Parent.findAll({
-		 where: { id: req.params.id }
-		}).then(parent => res.send(parent));
+        db.Parent.findAll({
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(function(getparent) {
+
+                // Comprobar si el array esta vacio
+                if (getparent.length == 0) {
+                    return res.status(404).send({
+                        status: 'El representante no existe'
+                    });
+                }
+
+                // Devolver respuesta
+                return res.status(200).send({
+                    status: 'success',
+                    Parent: getparent
+                });
+            })
+            .catch(error => res.status(400).send(error))
 	},
 
 	getParents: function(req, res){
