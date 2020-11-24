@@ -65,9 +65,27 @@ var controller = {
 	},
 
 	getSchool: function(req, res){
-		db.School.findAll({
-		 where: { id: req.params.id }
-		}).then(school => res.send(school));
+        db.School.findAll({
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(function(getschool) {
+
+                // Comprobar si el array esta vacio
+                if (getschool.length == 0) {
+                    return res.status(404).send({
+                        status: 'La institucion no existe'
+                    });
+                }
+
+                // Devolver respuesta
+                return res.status(200).send({
+                    status: 'success',
+                    School: getschool
+                });
+            })
+            .catch(error => res.status(400).send(error))
 	},
 
 }
